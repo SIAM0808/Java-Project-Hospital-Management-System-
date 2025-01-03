@@ -21,41 +21,41 @@ public class Login extends JFrame implements ActionListener {
         int height = screenSize.height;
 
         // **width, height variable setting
-        // ImageIcon backgroundImage = new ImageIcon(ClassLoader.getSystemResource("icons/login.png"));
-        // Image i = backgroundImage.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
-        // ImageIcon ii = new ImageIcon(i);
-        // JLabel l1 = new JLabel(ii);
-        // l1.setBounds(0, 0, width, height);
-        // add(l1);
+        ImageIcon backgroundImage = new ImageIcon(ClassLoader.getSystemResource("icons/login.png"));
+        Image i = backgroundImage.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        ImageIcon ii = new ImageIcon(i);
+        JLabel l1 = new JLabel(ii);
+        l1.setBounds(0, 0, width, height);
+        l1.add(l1);
 
-        // Set layout to null for absolute positioning
-        // setLayout(null);
+        //Set layout to null for absolute positioning
+        setLayout(null);
 
         // **Username
         JLabel namelabel = new JLabel("Username");
         namelabel.setBounds(width - 500 - 100, height / 2 - 15, 100, 30); // Adjusted position
         namelabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         namelabel.setForeground(Color.BLACK);
-        add(namelabel);
+        l1.add(namelabel);
 
         // **password
         JLabel password = new JLabel("Password");
         password.setBounds(width - 500 - 100, height / 2 + 35, 100, 30); // Adjusted position
         password.setFont(new Font("Tahoma", Font.BOLD, 16));
         password.setForeground(Color.BLACK);
-        add(password);
+        l1.add(password);
 
         // **textfield for username
         textField = new JTextField();
         textField.setBounds(width - 370 - 100, height / 2 - 15, 200, 30); // Adjusted position
         textField.setFont(new Font("Poppins", Font.PLAIN, 16));
-        add(textField);
+        l1.add(textField);
 
         // **passwordfield for password
         passwordField = new JPasswordField();
         passwordField.setBounds(width - 370 - 100, height / 2 + 35, 200, 30); // Adjusted position
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-       add(passwordField);
+       l1.add(passwordField);
 
         // **login button
         b1 = new JButton("Login");
@@ -65,7 +65,7 @@ public class Login extends JFrame implements ActionListener {
         b1.setForeground(Color.WHITE);
         b1.addActionListener(this);
 
-        add(b1);
+        l1.add(b1);
 
         // **cancel button
         b2 = new JButton("Cancel");
@@ -74,7 +74,7 @@ public class Login extends JFrame implements ActionListener {
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         b2.addActionListener(this);
-        add(b2);
+        l1.add(b2);
 
         // **set layout and size:
         setExtendedState(JFrame.MAXIMIZED_BOTH);

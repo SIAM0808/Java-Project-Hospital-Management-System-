@@ -26,7 +26,7 @@ public class Login extends JFrame implements ActionListener {
         ImageIcon ii = new ImageIcon(i);
         JLabel l1 = new JLabel(ii);
         l1.setBounds(0, 0, width, height);
-        l1.add(l1);
+        add(l1);
 
         //Set layout to null for absolute positioning
         setLayout(null);
@@ -49,13 +49,13 @@ public class Login extends JFrame implements ActionListener {
         textField = new JTextField();
         textField.setBounds(width - 370 - 100, height / 2 - 15, 200, 30); // Adjusted position
         textField.setFont(new Font("Poppins", Font.PLAIN, 16));
-        l1.add(textField);
+        add(textField);
 
         // **passwordfield for password
         passwordField = new JPasswordField();
         passwordField.setBounds(width - 370 - 100, height / 2 + 35, 200, 30); // Adjusted position
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-       l1.add(passwordField);
+       add(passwordField);
 
         // **login button
         b1 = new JButton("Login");
@@ -64,8 +64,9 @@ public class Login extends JFrame implements ActionListener {
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         b1.addActionListener(this);
+        setLayout(null);
 
-        l1.add(b1);
+       l1.add(b1);
 
         // **cancel button
         b2 = new JButton("Cancel");
@@ -105,7 +106,7 @@ public class Login extends JFrame implements ActionListener {
                 ResultSet resultSet = c.statement.executeQuery(q);
     
                 if (resultSet.next()) { // Use the result only once
-                    new test();
+                    new Reception();
                     setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid login");

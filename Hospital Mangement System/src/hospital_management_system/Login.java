@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -94,17 +96,20 @@ public class Login extends JFrame implements ActionListener {
             try {
                 conection c = new conection();
                 String user = textField.getText();
-                
+
                 char[] passwordChars = passwordField.getPassword();
                 String Pass = new String(passwordChars);
-    
+
                 System.out.println("Username: " + user);
                 System.out.println("Password: " + Pass);
-    
+
                 String q = "select * from login where ID = '" + user + "' and PW = '" + Pass + "'";
                 System.out.println("query: " + q);
                 ResultSet resultSet = c.statement.executeQuery(q);
-    
+                // if(resultSet.next()) {
+                //     System.out.println("Result: " + resultSet.next());
+                // }
+                // resultSet.next() = 0;
                 if (resultSet.next()) { // Use the result only once
                     new Reception();
                     setVisible(false);
@@ -112,11 +117,11 @@ public class Login extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Invalid login");
                 }
             } catch (Exception E) {
+                System.out.println("Error in resultset");
                 E.printStackTrace();
             }
         } else {
             System.exit(0);
         }
     }
-    
 }

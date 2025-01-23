@@ -10,6 +10,7 @@ public class conection {
 
     public conection() {
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_management_system", "root", "565656");
             if (connection != null) {
                 statement = connection.createStatement();

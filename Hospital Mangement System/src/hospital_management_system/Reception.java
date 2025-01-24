@@ -81,7 +81,7 @@ public class Reception extends JFrame {
         b1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                new NEW_PATIENT();
             }
         });
 

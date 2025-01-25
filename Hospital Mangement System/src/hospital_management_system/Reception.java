@@ -95,7 +95,7 @@ public class Reception extends JFrame {
         b2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                
+               new ROOM(); // Open the Room frame
             }
         });
 
@@ -188,7 +188,7 @@ public class Reception extends JFrame {
         b9.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                System.exit(0);
+               
             }
         });
 

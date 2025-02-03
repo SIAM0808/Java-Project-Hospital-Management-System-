@@ -100,7 +100,7 @@ public class Reception extends JFrame {
         });
 
 
-        JButton b3 = new JButton("Depertment");
+        JButton b3 = new JButton("Department");
         b3.setBackground(new Color(246, 215, 118));
         b3.setFont(new Font("Arial", Font.BOLD, 15));
         // b1.setForeground(Color.WHITE);
@@ -109,7 +109,7 @@ public class Reception extends JFrame {
         b3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                new Department();
             }
         });
 
@@ -123,7 +123,7 @@ public class Reception extends JFrame {
         b4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                new Emplyoee_info();
             }
         });
         
@@ -136,7 +136,7 @@ public class Reception extends JFrame {
         b5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                new All_Patient_info();
             }
         });
 

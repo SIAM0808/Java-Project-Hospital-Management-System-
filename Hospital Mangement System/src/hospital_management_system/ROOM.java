@@ -20,8 +20,8 @@ public class ROOM extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(5, 5, width-10, height-10);
-        panel.setBackground(new Color(109, 164, 170));
+        panel.setBounds(0, 0, width-10, height-10);
+        panel.setBackground(new Color(111, 164, 190));
         add(panel);
 
 
@@ -36,7 +36,7 @@ public class ROOM extends JFrame {
         table = new JTable();
         table.setBounds(20, 50, 500, 900);
         // table.setBounds(20, 20, 1000, 500);
-        table.setBackground(new Color(90, 156, 163));
+        table.setBackground(new Color(111, 164, 190));
         panel.add(table);
         
         try{
@@ -76,7 +76,7 @@ public class ROOM extends JFrame {
 
 
         JButton back = new JButton("Back");
-        back.setBounds(width/2 - 200, height/2 - 100, 120, 30);
+        back.setBounds(width/2 - 225, height/2 - 100, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);

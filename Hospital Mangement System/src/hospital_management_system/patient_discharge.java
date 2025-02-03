@@ -1,6 +1,9 @@
 package hospital_management_system;
 
 import java.awt.*;
+import java.sql.ResultSet;
+import java.util.Date;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -43,15 +46,125 @@ public class patient_discharge extends JFrame{
 
         Choice c1 = new Choice();
         c1.setBounds(120, 85, 150, 30);
-        c1.setFont(new Font("Arial", Font.BOLD, 15));  
+        c1.setFont(new Font("Arial", Font.BOLD, 11));  
         panel.add(c1); 
+
+
+
+
+        try {
+            conection c = new conection();
+            ResultSet rs = c.statement.executeQuery("select * from patient_info");
+            while (rs.next()) {
+                c1.add(rs.getString("Number"));
+            }
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+
 
         JLabel l3 = new JLabel("Room no: ");
         l3.setBounds(25, 130, 100, 30);
         l3.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(l3);
 
+        JLabel l4 = new JLabel("In Time: ");
+        l4.setBounds(25, 175, 100, 30);
+        l4.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(l4);
+
+        JLabel RNo = new JLabel();
+        RNo.setBounds(120, 130, 280, 30);
+        RNo.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(RNo);
+
+        JLabel ITime = new JLabel();
+        ITime.setBounds(120, 175, 280, 30);
+        ITime.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(ITime);
+
+
+        JLabel l5 = new JLabel("Out Time: ");
+        l5.setBounds(25, 220, 100, 30);
+        l5.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(l5);
+
+
+
+        JLabel OUTtime = new JLabel();
+        OUTtime.setBounds(120, 220, 150, 30);
+        OUTtime.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(OUTtime);
+
+
+        Date date = new Date();
+        String str = date.toString();
+        JLabel OTime = new JLabel(str);
+        OTime.setBounds(120, 220, 280, 30);
+        OTime.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(OTime);
+
+        JButton check = new JButton("Check");
+        check.setBounds(142, 290, 120, 30);
+        check.setFont(new Font("Arial", Font.BOLD, 15));
+        check.setBackground(Color.BLACK);
+        check.setForeground(Color.WHITE);
+        panel.add(check);
+
+
+        JButton discharge = new JButton("Discharge");
+        discharge.setBounds(25, 290, 120, 30);
+        discharge.setFont(new Font("Arial", Font.BOLD, 15));
+        discharge.setBackground(Color.BLACK);
+        discharge.setForeground(Color.WHITE);
+        panel.add(discharge);
+
+        JButton back = new JButton("Back");
+        back.setBounds(265, 290, 120, 30);
+        back.setFont(new Font("Arial", Font.BOLD, 15));
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        panel.add(back);
+
         
+
+        check.addActionListener(e -> {
+            try {
+                conection c = new conection();
+                String patient_id = c1.getSelectedItem();
+                ResultSet rs = c.statement.executeQuery("select * from patient_info where Number = '"+patient_id+"'");
+                while (rs.next()) {
+                    RNo.setText(rs.getString("Room_Number"));
+                    ITime.setText(rs.getString("Time"));
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }});
+
+
+
+        discharge.addActionListener(e -> {
+            try {
+                conection c = new conection();
+                String patient_id = c1.getSelectedItem();
+                String query = "delete from patient_info where Number = '"+patient_id+"'";
+                c.statement.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Patient Discharged Successfully");
+                setVisible(false);
+                new patient_discharge();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        });
+
+
+        back.addActionListener(e -> {
+            this.setVisible(false);
+        });
+
 
         // setUndecorated(true);
         setSize((width/2+200)-500, (height/2+100)-200);

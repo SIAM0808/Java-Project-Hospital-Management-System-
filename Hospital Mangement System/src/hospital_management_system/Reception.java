@@ -33,34 +33,33 @@ public class Reception extends JFrame {
         panel2.setLayout(null);
         panel2.setBounds(5, 5, width, 198);
         panel2.setBackground(new Color(109, 114, 110));
-        add(panel2);
+        add(panel2);;
 
-            // Custom JPanel to display moving text
-            JPanel textPanel = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    g.setFont(new Font("Arial", Font.BOLD, 20));
-                    g.setColor(Color.WHITE);
-                    g.drawString("Welcome to DR. M R Khan Medical Center", textX, 30);
-                }
-            };
-            textPanel.setBounds(10,105, textWidth, 30); // Adjust the position and size as needed
-            textPanel.setBackground(new Color(109, 114, 110));
-            panel2.add(textPanel);
+             // Custom JPanel to display moving text
+        JPanel textPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setFont(new Font("Arial", Font.BOLD, 20));
+                g.setColor(Color.WHITE);
+                g.drawString("Welcome to DR. M R Khan Medical Center", textX, 30);
+            }
+        };
+            // textWidth = 400; // Adjust the width of the text as needed
+        textX = 600; // Start from the right side
+        textPanel.setBounds(10, 105, 600, 30); // Adjust the position and size as needed
+        textPanel.setBackground(new Color(109, 114, 110));
+        panel2.add(textPanel);
     
-            // Timer to update the text position
-            Timer timer = new Timer(30, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    textX += 2; // Move text to the right
-                    if (textX > textPanel.getWidth()) {
-                        textX = -textWidth; // Reset text position
-                    }
-                    textPanel.repaint();
-                }
-            });
-            timer.start();
+             // Timer to update the text position
+        Timer timer = new Timer(30, _ -> {
+            textX -= 2; // Move text to the left
+            if (textX + textWidth < 0) {
+                textX = width; // Reset to the right side
+            }
+            textPanel.repaint();
+        });
+        timer.start();
 
 
 

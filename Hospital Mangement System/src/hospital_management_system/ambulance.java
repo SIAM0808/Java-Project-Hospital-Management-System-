@@ -64,7 +64,7 @@ public class ambulance extends JFrame{
 
 
         setSize(800, 400);
-        setLocation(400, 200);
+        setLocation(350, 200);
         setLayout(null);
         setVisible(true);
     }

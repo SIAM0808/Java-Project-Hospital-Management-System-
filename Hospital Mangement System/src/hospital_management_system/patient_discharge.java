@@ -152,6 +152,8 @@ public class patient_discharge extends JFrame{
                 String patient_id = c1.getSelectedItem();
                 String query = "delete from patient_info where Number = '"+patient_id+"'";
                 c.statement.executeUpdate(query);
+                String q2 = "update room set Availability = 'Available' where room_no = '"+RNo.getText()+"'";
+                c.statement.executeUpdate(q2);
                 JOptionPane.showMessageDialog(null, "Patient Discharged Successfully");
                 setVisible(false);
                 new patient_discharge();

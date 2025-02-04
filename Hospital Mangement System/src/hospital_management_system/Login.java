@@ -35,14 +35,14 @@ public class Login extends JFrame implements ActionListener {
 
         // **Username
         JLabel namelabel = new JLabel("Username");
-        namelabel.setBounds(width - 500 - 100, height / 2 - 15, 100, 30); // Adjusted position
+        namelabel.setBounds(width - 500 - 80, height / 2 - 15, 100, 30); // Adjusted position
         namelabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         namelabel.setForeground(Color.BLACK);
         l1.add(namelabel);
 
         // **password
         JLabel password = new JLabel("Password");
-        password.setBounds(width - 500 - 100, height / 2 + 35, 100, 30); // Adjusted position
+        password.setBounds(width - 500 - 80, height / 2 + 35, 100, 30); // Adjusted position
         password.setFont(new Font("Tahoma", Font.BOLD, 16));
         password.setForeground(Color.BLACK);
         l1.add(password);

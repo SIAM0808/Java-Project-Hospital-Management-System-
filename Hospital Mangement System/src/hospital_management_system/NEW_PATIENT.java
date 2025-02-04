@@ -24,7 +24,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
         int height = screenSize.height;
 
 
-
+        System.out.println(height + " " + width);
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(0, 0, width, height);

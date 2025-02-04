@@ -5,8 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.ResultSet;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
+// import javax.swing.*;
+// import javax.swing.table.DefaultTableCellRenderer;
 
 import net.proteanit.sql.DbUtils;
 

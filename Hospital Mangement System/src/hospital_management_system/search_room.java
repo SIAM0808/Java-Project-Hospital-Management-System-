@@ -4,7 +4,7 @@ import java.awt.*;
 import java.sql.ResultSet;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
+// import javax.swing.table.DefaultTableCellRenderer;
 
 import net.proteanit.sql.DbUtils;
 
@@ -16,7 +16,7 @@ public class search_room extends JFrame{
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 0, 800, 500);
+        panel.setBounds(0, 0, 800, 600);
         panel.setBackground(new Color(111, 164, 190));
         add(panel);
 
@@ -90,7 +90,7 @@ public class search_room extends JFrame{
         panel.add(search);
         
 
-        search.addActionListener(e -> {
+        search.addActionListener(_ -> {
             try {
                 conection c = new conection();
                 String str = "select * from room where Availability = '"+c1.getSelectedItem()+"'";
@@ -101,8 +101,20 @@ public class search_room extends JFrame{
             }
         });
 
-        setSize(800, 500);
-        setLocation(300, 200);
+        JButton back = new JButton("Back");
+        back.setBounds(300, 510, 120, 30);
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        panel.add(back);
+
+
+        back.addActionListener(_ -> {
+            setVisible(false);
+        });
+
+        setUndecorated(true);
+        setSize(800, 600);
+        setLocation(220, 70);
         setLayout(null);
         setVisible(true);
     }

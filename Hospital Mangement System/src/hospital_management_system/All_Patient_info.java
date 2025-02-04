@@ -144,7 +144,7 @@ try {
         back.setBounds(x-20, 425, 100, 30); // Adjust the position as needed
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
-        back.addActionListener(e -> {
+        back.addActionListener(_ -> {
             this.setVisible(false);
         });
         panel.add(back);

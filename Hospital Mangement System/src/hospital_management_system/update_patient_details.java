@@ -126,7 +126,7 @@ public class update_patient_details extends JFrame {
         panel.add(b2);
 
 
-        b1.addActionListener(e -> {
+        b1.addActionListener(_ -> {
             
             String patientID = c1.getSelectedItem();
             String q = "select * from patient_info where Name = '"+patientID+"'";
@@ -157,7 +157,7 @@ public class update_patient_details extends JFrame {
 
 
 
-        b2.addActionListener(e -> {
+        b2.addActionListener(_ -> {
             setVisible(false);
         });
 
@@ -172,7 +172,7 @@ public class update_patient_details extends JFrame {
         panel.add(update);
 
 
-        update.addActionListener(e -> {
+        update.addActionListener(_ -> {
             String patientID = c1.getSelectedItem();
             String roomNumber = t1.getText();
             String inTime = t2.getText();
@@ -193,9 +193,10 @@ public class update_patient_details extends JFrame {
             }
         });
 
-        setSize(width/2+200, height/2+100);
+        setUndecorated(true);
+        setSize(width/2+200, height/2+130);
         setLayout(null);
-        setLocation(width/5+300, height/4+100);
+        setLocation(width/5, height/5);
         setVisible(true);
 
     }

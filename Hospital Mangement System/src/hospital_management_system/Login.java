@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
+// import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+// import java.sql.SQLException;
 
 public class Login extends JFrame implements ActionListener {
 

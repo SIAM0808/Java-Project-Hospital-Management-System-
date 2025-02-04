@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.util.Date;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
+// import javax.swing.table.DefaultTableCellRenderer;
 
-import net.proteanit.sql.DbUtils;
+// import net.proteanit.sql.DbUtils;
 
 public class patient_discharge extends JFrame{
     patient_discharge() {
@@ -22,7 +22,7 @@ public class patient_discharge extends JFrame{
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 0, width, height);
+        panel.setBounds(0, 0, width-300, height);
         panel.setBackground(new Color(109, 164, 190));
         add(panel);
 
@@ -32,8 +32,8 @@ public class patient_discharge extends JFrame{
         l1.setForeground(Color.WHITE);
         panel.add(l1);
 
-        JLabel l2 = new JLabel("Patient ID");
-        l2.setBounds(25, 85, 100, 30);
+        JLabel l2 = new JLabel("Patient ID: ");
+        l2.setBounds(25, 81, 80, 30);
         l2.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(l2);
 
@@ -45,7 +45,7 @@ public class patient_discharge extends JFrame{
 
 
         Choice c1 = new Choice();
-        c1.setBounds(120, 85, 150, 30);
+        c1.setBounds(120, 88, 150, 30);
         c1.setFont(new Font("Arial", Font.BOLD, 11));  
         panel.add(c1); 
 
@@ -60,7 +60,7 @@ public class patient_discharge extends JFrame{
             }
             
         } catch (Exception e) {
-            // TODO: handle exception
+            
             e.printStackTrace();
         }
 
@@ -108,7 +108,7 @@ public class patient_discharge extends JFrame{
         panel.add(OTime);
 
         JButton check = new JButton("Check");
-        check.setBounds(142, 290, 120, 30);
+        check.setBounds(157, 290, 120, 30);
         check.setFont(new Font("Arial", Font.BOLD, 15));
         check.setBackground(Color.BLACK);
         check.setForeground(Color.WHITE);
@@ -123,7 +123,7 @@ public class patient_discharge extends JFrame{
         panel.add(discharge);
 
         JButton back = new JButton("Back");
-        back.setBounds(265, 290, 120, 30);
+        back.setBounds(285, 290, 120, 30);
         back.setFont(new Font("Arial", Font.BOLD, 15));
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
@@ -131,7 +131,7 @@ public class patient_discharge extends JFrame{
 
         
 
-        check.addActionListener(e -> {
+        check.addActionListener(_ -> {
             try {
                 conection c = new conection();
                 String patient_id = c1.getSelectedItem();
@@ -146,7 +146,7 @@ public class patient_discharge extends JFrame{
 
 
 
-        discharge.addActionListener(e -> {
+        discharge.addActionListener(_ -> {
             try {
                 conection c = new conection();
                 String patient_id = c1.getSelectedItem();
@@ -161,15 +161,15 @@ public class patient_discharge extends JFrame{
         });
 
 
-        back.addActionListener(e -> {
+        back.addActionListener(_ -> {
             this.setVisible(false);
         });
 
 
-        // setUndecorated(true);
-        setSize((width/2+200)-500, (height/2+100)-200);
+        setUndecorated(true);
+        setSize(width/2, height/2+100);
         setLayout(null);
-        setLocation(width/5+300, height/4+100);
+        setLocation(width/5 + 70, height/4);
         setVisible(true);
     }
     public static void main(String[] args) {

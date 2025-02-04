@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.util.*;
 public class NEW_PATIENT extends JFrame implements ActionListener{
-    JComboBox comboBox, comboBox1;
+    JComboBox<String> comboBox, comboBox1;
 
     JTextField textFieldNumber, testName, textFieldCountry, textFieldDeposite, textFieldFaculty, textFieldDisease;
 
@@ -57,7 +57,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
 
 
 
-        comboBox = new JComboBox(new String[] {"Birth Certificate", "Driving License", "Passport", "Adhar Card"});
+        comboBox = new JComboBox<String>(new String[] {"Birth Certificate", "Driving License", "Passport", "Adhar Card"});
         comboBox.setBounds(240, 72, 200, 25);
         panel.add(comboBox);
 
@@ -179,7 +179,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
         labelFaculty.setForeground(Color.WHITE);
         panel.add(labelFaculty);
 
-        comboBox1 = new JComboBox(new String[] {"Engineering and Technology", "Applied Science and Technology"
+        comboBox1 = new JComboBox<String>(new String[] {"Engineering and Technology", "Applied Science and Technology"
         , "Biological Science and Technology", "Health Science",
               "Arts and Social Science", "Science",
             "Business Studies", "Veterinary Medicine"});
@@ -190,14 +190,14 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
         b1 = new JButton("Add");
         b1.setBackground(new Color(246, 215, 118));
         b1.setFont(new Font("Arial", Font.BOLD, 15));
-        b1.setBounds(100, 500, 100, 30);
+        b1.setBounds(540, 250, 100, 30);
         b1.addActionListener(this);
         panel.add(b1);
 
         b2 = new JButton("Back");
         b2.setBackground(new Color(246, 215, 118));
         b2.setFont(new Font("Arial", Font.BOLD, 15));
-        b2.setBounds(250, 500, 100, 30);
+        b2.setBounds(540, 300, 100, 30);
         panel.add(b2);
 
         b2.addActionListener(this);

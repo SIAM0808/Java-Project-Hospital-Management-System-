@@ -20,7 +20,7 @@ public class ROOM extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 0, width-10, height-10);
+        panel.setBounds(0, 0, width/2+400, height-10);
         panel.setBackground(new Color(111, 164, 190));
         add(panel);
 
@@ -29,12 +29,12 @@ public class ROOM extends JFrame {
         Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(image);
         JLabel label = new JLabel(imageIcon1);
-        label.setBounds(700, 150, 200, 200);
+        label.setBounds(620, 100, 200, 200);
         panel.add(label);
 
 
         table = new JTable();
-        table.setBounds(20, 50, 500, 900);
+        table.setBounds(20, 50, 500, 300);
         // table.setBounds(20, 20, 1000, 500);
         table.setBackground(new Color(111, 164, 190));
         panel.add(table);
@@ -76,7 +76,7 @@ public class ROOM extends JFrame {
 
 
         JButton back = new JButton("Back");
-        back.setBounds(width/2 - 225, height/2 - 100, 120, 30);
+        back.setBounds(300, 350, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -89,9 +89,9 @@ public class ROOM extends JFrame {
 
 
         setUndecorated(true);
-        setSize(width/2+100, height/2+100);
+        setSize(width/2+400, height/2+100);
         setLayout(getLayout());
-        setLocation(width/5, height/4);
+        setLocation(width/5 - 150, height/4);
         setVisible(true);
     }
     public static void main(String[] args) {

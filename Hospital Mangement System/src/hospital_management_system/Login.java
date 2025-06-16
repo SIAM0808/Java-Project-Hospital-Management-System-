@@ -15,6 +15,7 @@ public class Login extends JFrame implements ActionListener {
     JButton b1, b2;
 
     Login() {
+        System.out.println("Login");
 
         // **backgroud image:
         Toolkit toolkit = Toolkit.getDefaultToolkit();

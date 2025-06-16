@@ -6,6 +6,7 @@
     "sqltools.connections": [],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "Hospital Mangement System/lib/mysql-connector-java-8.0.28.jar"
+        "Hospital Mangement System/lib/mysql-connector-java-8.0.28.jar",
+        "Hospital Mangement System/lib/ResultSet2xml.jar"
     ]
 }

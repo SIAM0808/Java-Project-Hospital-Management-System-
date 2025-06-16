@@ -23,7 +23,7 @@ public class ambulance extends JFrame{
 
 
         JTable table = new JTable();
-        table.setBounds(50, 50, 700, 300);
+        table.setBounds(50, 50, 700, 200);
         table.setBackground(new Color(111, 164, 190));
         table.setFont(new Font("Arial", Font.BOLD, 11));
         panel.add(table);
@@ -45,23 +45,49 @@ public class ambulance extends JFrame{
         panel.add(name);
 
         JLabel gender = new JLabel("Gender");
-        gender.setBounds(220, 20, 100, 20);
+        gender.setBounds(193, 20, 100, 20);
         gender.setFont(new Font("Arial", Font.BOLD, 13));
         gender.setForeground(Color.WHITE);
         panel.add(gender);
 
         JLabel available = new JLabel("Availability");
-        available.setBounds(400, 20, 100, 20);
+        available.setBounds(330, 20, 100, 20);
         available.setFont(new Font("Arial", Font.BOLD, 13));
         available.setForeground(Color.WHITE);
         panel.add(available);
 
+
         JLabel car_name = new JLabel("Car Name");
-        car_name.setBounds(600, 20, 100, 20);
+        car_name.setBounds(468, 20, 100, 20);
         car_name.setFont(new Font("Arial", Font.BOLD, 13));
         car_name.setForeground(Color.WHITE);
         panel.add(car_name);
 
+        JLabel phone_no = new JLabel("Phone No");
+        phone_no.setBounds(610, 20, 100, 20);
+        phone_no.setFont(new Font("Arial", Font.BOLD, 13));
+        phone_no.setForeground(Color.WHITE);
+        panel.add(phone_no);
+
+        // Hiring ambulance and update its availability
+        JButton hireButton = new JButton("Hire Ambulance");
+        hireButton.setBounds(50, 310, 150, 30);
+        hireButton.setFont(new Font("Arial", Font.BOLD, 12));
+        hireButton.setBackground(new Color(109, 164, 170));
+        hireButton.setForeground(Color.WHITE);
+        hireButton.addActionListener(e -> {
+            try {
+                conection c = new conection();
+                String str = "update ambulance set availability = 'unavailable' where availability = 'available' and car_id = '' limit 1";
+                c.statement.executeUpdate(str);
+                JOptionPane.showMessageDialog(null, "Ambulance Hired Successfully");
+                ResultSet rs = c.statement.executeQuery("select * from Ambulance");
+                table.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        panel.add(hireButton);
 
         setSize(800, 400);
         setLocation(350, 200);

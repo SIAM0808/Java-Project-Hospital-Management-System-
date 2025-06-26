@@ -75,20 +75,79 @@ public class ambulance extends JFrame{
         hireButton.setFont(new Font("Arial", Font.BOLD, 12));
         hireButton.setBackground(new Color(109, 164, 170));
         hireButton.setForeground(Color.WHITE);
-        hireButton.addActionListener(e -> {
+        hireButton.addActionListener(_ -> {
             try {
                 conection c = new conection();
-                String str = "update ambulance set availability = 'unavailable' where availability = 'available' and car_id = '' limit 1";
-                c.statement.executeUpdate(str);
+                String str = "update ambulance set availability = 'unavailable' where availability = 'available' limit 1";
+                int check = c.statement.executeUpdate(str);
+
+
+                // ResultSet rs = c.statement.executeQuery("select * from Ambulance where availability = 'unavailable' limit 1");
+                // if (rs.next()) {
+                //     String carId = rs.getString("car_id");
+                //     JOptionPane.showMessageDialog(null, "Ambulance with Car ID: " + carId + " has been hired.");
+                // } else {
+                //     JOptionPane.showMessageDialog(null, "No available ambulances to hire.");
+                // }
+                if(check > 0){
                 JOptionPane.showMessageDialog(null, "Ambulance Hired Successfully");
-                ResultSet rs = c.statement.executeQuery("select * from Ambulance");
-                table.setModel(DbUtils.resultSetToTableModel(rs));
+                ResultSet rss = c.statement.executeQuery("select * from Ambulance");
+                table.setModel(DbUtils.resultSetToTableModel(rss));
+                }else{
+                    JOptionPane.showMessageDialog(null, "No available ambulances to hire.");
+                }
+                
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
         panel.add(hireButton);
-
+        // Update availability button via car_id 
+        JButton updateButton = new JButton("Update Availability");
+        updateButton.setBounds(220, 310, 150, 30);
+        updateButton.setFont(new Font("Arial", Font.BOLD, 12));
+        updateButton.setBackground(new Color(109, 164, 170));
+        updateButton.setForeground(Color.WHITE);
+        updateButton.addActionListener(_ -> {
+            String carId = JOptionPane.showInputDialog("Enter Car ID to update availability:");
+            // If user clicks cancel, carId will be null
+            if (carId == null) {
+                return;
+            }
+            if (!carId.trim().isEmpty()) {
+                try {
+                    conection c = new conection();
+                    String str = "update ambulance set availability = 'available' where car_id = '" + carId + "'";
+                    int rowsAffected = c.statement.executeUpdate(str);
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(null, "Ambulance with Car ID: " + carId + " is now available.");
+                        ResultSet rss = c.statement.executeQuery("select * from Ambulance");
+                        table.setModel(DbUtils.resultSetToTableModel(rss));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No ambulance found with Car ID: " + carId);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Car ID cannot be empty.");
+            }
+        });
+        panel.add(updateButton);
+        // Exit button
+        JButton exitButton = new JButton("Exit");
+        exitButton.setBounds(400, 310, 150, 30);
+        exitButton.setFont(new Font("Arial", Font.BOLD, 12));
+        exitButton.setBackground(new Color(109, 164, 170));
+        exitButton.setForeground(Color.WHITE);
+        exitButton.addActionListener(_ -> {
+            int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
+        panel.add(exitButton);
+        setUndecorated(true);
         setSize(800, 400);
         setLocation(350, 200);
         setLayout(null);

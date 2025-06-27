@@ -113,7 +113,7 @@ public class Reception extends JFrame {
         });
 
 
-        JButton b4 = new JButton("All Employee Info");
+        JButton b4 = new JButton("All Doctor Info");
         b4.setBackground(new Color(246, 215, 118));
         b4.setFont(new Font("Arial", Font.BOLD, 15));
         // b1.setForeground(Color.WHITE);

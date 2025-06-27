@@ -20,7 +20,7 @@ public class ROOM extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 0, width/2+400, height-10);
+        // panel.setBounds(100, 0, width/2+200, height-10);
         panel.setBackground(new Color(111, 164, 190));
         add(panel);
 
@@ -89,9 +89,10 @@ public class ROOM extends JFrame {
 
 
         setUndecorated(true);
-        setSize(width/2+400, height/2+100);
-        setLayout(getLayout());
-        setLocation(width/5 - 150, height/4);
+        panel.setBounds(150, 0, width/2+100, height-10);
+        setSize(width/2+100, height/2);
+        // setLayout(getLayout());
+        setLocation(width/5 - 50, height/4);
         setVisible(true);
     }
     public static void main(String[] args) {

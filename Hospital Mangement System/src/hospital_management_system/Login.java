@@ -31,7 +31,6 @@ public class Login extends JFrame implements ActionListener {
         l1.setBounds(0, 0, width, height);
         add(l1);
 
-        //Set layout to null for absolute positioning
         setLayout(null);
 
         // **Username

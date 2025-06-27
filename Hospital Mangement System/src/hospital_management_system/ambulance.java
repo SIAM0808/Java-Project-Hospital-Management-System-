@@ -143,7 +143,8 @@ public class ambulance extends JFrame{
         exitButton.addActionListener(_ -> {
             int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                System.exit(0);
+                // System.exit(0);
+                this.setVisible(false);
             }
         });
         panel.add(exitButton);

@@ -45,7 +45,7 @@ public class Emplyoee_info extends JFrame{
 
         try{
             conection c = new conection();
-            String q = "select * from EMP_info";
+            String q = "select * from Doctor_info";
             ResultSet resultSet = c.statement.executeQuery(q);
             table.setModel(DbUtils.resultSetToTableModel(resultSet));
 

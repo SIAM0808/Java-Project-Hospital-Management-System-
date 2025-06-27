@@ -16,7 +16,7 @@ public class search_room extends JFrame{
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 0, 800, 600);
+        panel.setBounds(70, 110, 800, 600);
         panel.setBackground(new Color(111, 164, 190));
         add(panel);
 
@@ -114,8 +114,8 @@ public class search_room extends JFrame{
 
         setUndecorated(true);
         setSize(800, 600);
-        setLocation(220, 70);
-        setLayout(null);
+        setLocation(290, 200);
+        // setLayout(null);
         setVisible(true);
     }
 

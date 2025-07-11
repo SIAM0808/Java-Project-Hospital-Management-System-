@@ -36,7 +36,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
         Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
         ImageIcon imageIcon1 = new ImageIcon(image);
         JLabel label = new JLabel(imageIcon1);
-        label.setBounds(800, 150, 200, 200);
+        label.setBounds(680, 150, 180, 180);
         panel.add(label);
 
 

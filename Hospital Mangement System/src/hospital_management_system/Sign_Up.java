@@ -76,7 +76,7 @@ public class Sign_Up extends JFrame implements ActionListener {
                 int rowsAffected = c.statement.executeUpdate(q);
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(null, "Sign Up Successful! You can now Sign In.");
-                    System.exit(0);
+                    this.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Sign Up Failed. Please try again.");
                 }

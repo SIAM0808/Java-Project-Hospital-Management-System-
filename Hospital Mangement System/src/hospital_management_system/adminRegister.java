@@ -4,18 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 
-public class Sign_Up extends JFrame implements ActionListener {
+public class adminRegister extends JFrame implements ActionListener {
     JButton submit, cancel;
-    JTextField textField, emailField, add_filed, userIdField;
+    JTextField textField, emailField, add_filed;
     JPasswordField passwordFeild1, passwordField2;
+    JComboBox<String> comboBox;
 
-    Sign_Up() {
+    adminRegister() {
         int posX = 250;
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setBounds(0, 0, 490, 450);
+        panel.setBounds(0, 0, 550, 450);
         panel.setBackground(new Color(111, 164, 190));
         add(panel);
         JLabel username = new JLabel("New Username: ");
@@ -73,22 +73,12 @@ public class Sign_Up extends JFrame implements ActionListener {
         add_filed.setFont(new Font("Arial", Font.PLAIN, 16));
         panel.add(add_filed);
 
-        JLabel indentity = new JLabel("User Register");
-        indentity.setBounds(posX - 80, 20, 200, 30);
-        indentity.setFont(new Font("Arial", Font.BOLD, 20));
-        indentity.setForeground(Color.WHITE);
-        panel.add(indentity);
-
-        JLabel userID = new JLabel("User ID: ");
-        userID.setBounds(55, 310, 150, 30);
-        userID.setFont(new Font("Arial", Font.BOLD, 16));
-        userID.setForeground(Color.WHITE);
-        panel.add(userID);
-
-        userIdField = new JTextField();
-        userIdField.setBounds(posX, 310, 200, 30);
-        userIdField.setFont(new Font("Arial", Font.PLAIN, 16));
-        panel.add(userIdField);
+        comboBox = new JComboBox<>(new String[] { "Admin", "Patient" });
+        comboBox.setBounds(posX, 310, 200, 30);
+        comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+        comboBox.setBackground(new Color(109, 164, 170));
+        comboBox.setForeground(Color.WHITE);
+        panel.add(comboBox);
 
         submit = new JButton("Submit");
         submit.setBounds(95, 370, 100, 30);
@@ -104,11 +94,11 @@ public class Sign_Up extends JFrame implements ActionListener {
         cancel.setBackground(Color.BLACK);
         cancel.setForeground(Color.WHITE);
         cancel.addActionListener(_ -> {
-            Sign_Up.this.setVisible(false);
+            adminRegister.this.setVisible(false);
         });
         panel.add(cancel);
         setUndecorated(true);
-        setSize(490, 450);
+        setSize(550, 450);
         // setSize(950, 950);
         setLocation(970, 330);
         setLayout(null);
@@ -116,11 +106,12 @@ public class Sign_Up extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Sign_Up();
+        new adminRegister();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String person = (String) comboBox.getSelectedItem();
         if (e.getSource() == submit) {
             conection c = new conection();
             String user = textField.getText();
@@ -130,7 +121,6 @@ public class Sign_Up extends JFrame implements ActionListener {
             System.out.println("Username: " + user);
             System.out.println("Password: " + Pass);
 
-            String userId = userIdField.getText();
             // Check if passwords match
             if (!Pass.equals(new String(passwordField2.getPassword()))) {
                 JOptionPane.showMessageDialog(null, "Passwords do not match!");
@@ -138,7 +128,7 @@ public class Sign_Up extends JFrame implements ActionListener {
             }
 
             // Check if any field is empty
-            if (userId.isEmpty() || user.isEmpty() || Pass.isEmpty() || emailField.getText().isEmpty() || add_filed.getText().isEmpty()) {
+            if (user.isEmpty() || Pass.isEmpty() || emailField.getText().isEmpty() || add_filed.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill all fields!");
                 return;
             }
@@ -150,35 +140,29 @@ public class Sign_Up extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Invalid email format!");
                 return;
             }
-            String q1, q2;
-            // unique userId check
-            q1 = "select * from userRegister where userId = '" + userId + "'";
-            q2 = "insert into userRegister (username, password, userId, permanent_add, gmail) values ('" + user + "', '" + Pass + "', '" + userId + "', '" + perm_add + "', '" + email + "')";
-            // System.out.println("query: " + q1);
-            System.out.println("query: " + q2);
+            String q = null;
+            if(person.equals("Admin")) {
+                q = "insert into login (ID, PW) values ('" + user + "', '" + Pass + "')";
+            } else if(person.equals("Patient")) {
+                q = "insert into patientLogin (username, password, permanent_add, gmail) values ('" + user + "', '" + Pass + "', '" + perm_add + "', '" + email + "')";
+            }
 
+            System.out.println("query: " + q);
+            if(q != null) {
                 try {
-                    ResultSet rs = c.statement.executeQuery(q1);
-                    if (rs.next()) {
-                        JOptionPane.showMessageDialog(null, "User ID already exists! Please choose a different User ID.");
-                        return;
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            
-                try {
-                    int rowsAffected = c.statement.executeUpdate(q2);
+                    int rowsAffected = c.statement.executeUpdate(q);
                     if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Registered Successful! You can now Login In.");
+                        JOptionPane.showMessageDialog(null, "Sign Up Successful! You can now Sign In.");
                         this.setVisible(false);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Registeration Failed. Please try again.");
+                        JOptionPane.showMessageDialog(null, "Sign Up Failed. Please try again.");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            
+            }else{
+                JOptionPane.showMessageDialog(null, "Please select a valid user type (Admin/Patient).");
+            }
         }
     }
 }

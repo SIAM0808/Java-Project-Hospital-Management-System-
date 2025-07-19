@@ -10,6 +10,7 @@ public class Sign_In extends JFrame implements ActionListener {
     JTextField textField;
     JButton sign_in, sign_up, cancel;
     JPasswordField passwordField;
+    JComboBox<String> comboBox;
 
     Sign_In() {
         JPanel panel = new JPanel();
@@ -74,6 +75,13 @@ public class Sign_In extends JFrame implements ActionListener {
             Sign_In.this.setVisible(false);
         });
 
+        comboBox = new JComboBox<>(new String[] { "Admin", "Patient" });
+        comboBox.setBounds(155, 160, 200, 30);
+        comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+        comboBox.setBackground(new Color(109, 164, 170));
+        comboBox.setForeground(Color.WHITE);
+        panel.add(comboBox);
+
         setUndecorated(true);
         setSize(450, 450);
         // setSize(950, 950);
@@ -88,6 +96,7 @@ public class Sign_In extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String person = (String) comboBox.getSelectedItem();
         if (e.getSource() == sign_in) {
             try {
                 conection c = new conection();
@@ -98,16 +107,40 @@ public class Sign_In extends JFrame implements ActionListener {
 
                 System.out.println("Username: " + user);
                 System.out.println("Password: " + Pass);
+                String q;
+                if (person == "Admin") {
+                    q = "select * from login where ID = '" + user + "' and PW = '" + Pass + "'";
+                } else {
+                    q = "select * from userRegister where username = '" + user + "' and password = '" + Pass + "'";
+                }
 
-                String q = "select * from login where ID = '" + user + "' and PW = '" + Pass + "'";
                 System.out.println("query: " + q);
                 ResultSet resultSet = c.statement.executeQuery(q);
                 // if(resultSet.next()) {
                 // System.out.println("Result: " + resultSet.next());
                 // }
                 // resultSet.next() = 0;
-                if (resultSet.next()) { // Use the result only once
-                    new Reception();
+                if (resultSet.next()) {
+                    // Use the result only once
+                    if (person.equals("Admin")) {
+                        new adminReception();
+                    } else if (person.equals("Patient")) {
+                        // Query to find userId using username and password
+                        String userIdQuery = "SELECT userId FROM userRegister WHERE username = '" + user
+                                + "' AND password = '" + Pass + "'";
+                        try {
+                            ResultSet rs = c.statement.executeQuery(userIdQuery);
+                            if (rs.next()) {
+                                String userId = rs.getString("userId");
+                                System.out.println("User ID: " + userId); // Debugging
+                                new Reception(userId); // Open Reception window
+                            } else {
+                                JOptionPane.showMessageDialog(null, "User not found!");
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                     setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username or Password");

@@ -72,7 +72,7 @@ public class Login extends JFrame implements ActionListener {
        l1.add(b1);
 
         // **Sign Up button
-        b2 = new JButton("Sign Up");
+        b2 = new JButton("Register");
         b2.setBounds(width - 260 - 150, height / 2 + 50, 200, 40); // Adjusted position
         b2.setFont(new Font("Poppins", Font.BOLD, 20));
         b2.setBackground(new Color(135, 206, 235));

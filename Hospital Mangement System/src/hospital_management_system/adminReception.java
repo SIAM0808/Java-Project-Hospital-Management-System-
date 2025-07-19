@@ -12,15 +12,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Reception extends JFrame {
+public class adminReception extends JFrame {
     private int textX = 0; // Initial x position of the text
     private final int textWidth = 500; // Width of the text area
-    private String userId;
+    private String adminId;
     // private final int panel2Height = 198; // Height of panel2
-    public Reception(String userId) {
-        this.userId = userId; // Store the userId
+    adminReception() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int width = screenSize.width;
@@ -35,7 +35,7 @@ public class Reception extends JFrame {
         JPanel panel2 = new JPanel();
         panel2.setLayout(null);
         panel2.setBounds(5, 5, width, 198);
-        panel2.setBackground(new Color(109, 114, 110));
+        panel2.setBackground(new Color(100, 114, 110));
         add(panel2);;
 
              // Custom JPanel to display moving text
@@ -70,7 +70,7 @@ public class Reception extends JFrame {
         Image image1 = i1.getImage().getScaledInstance(115, 115, Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(image1);
         JLabel l1 = new JLabel(i2);
-        l1.setBounds(width-150, 10, 115, 115); // Adjust the position and size as needed
+        l1.setBounds(width-100, 10, 115, 115); // Adjust the position and size as needed
         panel2.add(l1); // Add the label to panel2
 
 
@@ -83,7 +83,7 @@ public class Reception extends JFrame {
         b1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                new NEW_PATIENT(userId);
+                new NEW_PATIENT(adminId);
             }
         });
 
@@ -138,7 +138,7 @@ public class Reception extends JFrame {
         b5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                new All_Patient_info(userId);
+                new All_Patient_info(adminId);
             }
         });
 
@@ -194,39 +194,82 @@ public class Reception extends JFrame {
             }
         });
 
+
+
+
         JButton b10 = new JButton("Logout");
         b10.setBackground(new Color(246, 215, 118));
         b10.setFont(new Font("Arial", Font.BOLD, 15));
         // b1.setForeground(Color.WHITE);
         b10.setBounds(890, 65, 200, 30);
         panel2.add(b10);
+
+
+        JButton b11 = new JButton("Remove Admin");
+        b11.setBackground(new Color(246, 215, 118));
+        b11.setFont(new Font("Arial", Font.BOLD, 15));
+        // b11.setForeground(Color.BLACK);
+        b11.setBounds(1100, 10, 200, 30);
+        panel2.add(b11);
+
         b10.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 new Login();
-                Reception.this.setVisible(false);
+                adminReception.this.setVisible(false);
             }
         });
-        conection c = new conection();
 
-        // collect username form userRegister Table for display using userId
-        String userNameQuery = "SELECT username FROM userRegister WHERE userId = '" + this.userId + "'";
-        String userName;
-        try{
-            ResultSet rs = c.statement.executeQuery(userNameQuery);
-            if(rs.next()){
-                userName = rs.getString("username");
-                JLabel userLabel = new JLabel("Welcome! " + userName);
-                userLabel.setFont(new Font("Arial", Font.BOLD, 30));
-                userLabel.setBounds(600, 20, 400, 30); // Adjust the position and size as needed
-                userLabel.setForeground(Color.WHITE);
-                panel1.add(userLabel); // Add the label to panel1
-            }else {
-                System.out.println("User not found for userId: " + userId);
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
+
+        b11.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Prompt for admin username
+        String username = JOptionPane.showInputDialog("Enter Admin Username to Remove:");
+        if (username == null || username.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username cannot be empty.");
+            return;
         }
+
+        // Prompt for admin password
+        String password = JOptionPane.showInputDialog("Enter Admin Password:");
+        if (password == null || password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty.");
+            return;
+        }
+
+        try {
+
+            conection c = new conection();
+
+            // Exis tance of admin
+            String query = "SELECT * FROM login WHERE ID = '" + username + "' AND PW = '" + password + "'";
+            ResultSet rs = c.statement.executeQuery(query);
+
+            if (rs.next()) {
+                // Admin exists, proceed to delete
+                String deleteQuery = "DELETE FROM login WHERE ID = '" + username + "' AND PW = '" + password + "'";
+                int rowsAffected = c.statement.executeUpdate(deleteQuery);
+
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(null, "Admin removed successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Failed to remove admin.");
+                }
+            } else {
+                // Admin not found or incorrect credentials
+                JOptionPane.showMessageDialog(null, "Invalid username or password.");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "An error occurred while removing the admin.");
+        }
+    }
+});
+
+
+
+
         // set full screen
         setSize(width, height);
         getContentPane().setBackground(Color.WHITE);
@@ -237,6 +280,6 @@ public class Reception extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Reception("Siam"); // Pass a sample userId for testing
+        new adminReception();
     }
 }

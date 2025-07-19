@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.util.*;
 public class NEW_PATIENT extends JFrame implements ActionListener{
+    private String userId;
     JComboBox<String> comboBox, comboBox1;
 
     JTextField textFieldNumber, testName, textFieldCountry, textFieldDeposite, textFieldFaculty, textFieldDisease;
@@ -17,7 +18,8 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
     JLabel date;
 
     JButton b1, b2;
-    NEW_PATIENT(){
+    NEW_PATIENT(String userId){
+        this.userId = userId; // Store the userId
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int width = screenSize.width;
@@ -203,9 +205,9 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
         b2.addActionListener(this);
 
         setUndecorated(true);
-        setSize(width/2+100, height/2+100);
+        setSize(width/2+100, height/2 - 20);
         setLayout(getLayout());
-        setLocation(width/5, height/4);
+        setLocation(width/5, height/4 + 50);
         setVisible(true);
 
     }
@@ -236,7 +238,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
 
 
             try{
-                String q = "insert into patient_info values('"+s1+"', '"+s2+"', '"+s3+"', '"+s4+"', '"+s6+"', '"+s7+"', '"+s8+"', '"+s9+"', '"+s5+"', '"+s10+"')";
+                String q = "insert into patient_info values('"+s1+"', '"+s2+"', '"+s3+"', '"+s4+"', '"+s6+"', '"+s7+"', '"+s8+"', '"+s9+"', '"+s5+"', '"+s10+"', '"+userId+"')";
                 String q1 = "update room set Availability = 'Occupied' where room_no = '"+s7+"'";
                 c.statement.executeUpdate(q);
                 c.statement.executeUpdate(q1);  
@@ -253,7 +255,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
 }
 
     public static void main(String[] args) {
-        new NEW_PATIENT();
+        new NEW_PATIENT("Siam");
     }
    
 }

@@ -70,7 +70,7 @@ public class Department extends JFrame{
         setUndecorated(true);
         setSize(width/2+100, height/2+100);
         setLayout(null);
-        setLocation(width/5, height/4);
+        setLocation(width/5 + 20, height/4 + 20);
         setVisible(true);
         
         

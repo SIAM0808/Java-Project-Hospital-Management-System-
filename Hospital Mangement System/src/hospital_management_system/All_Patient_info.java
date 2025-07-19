@@ -9,8 +9,9 @@ import net.proteanit.sql.DbUtils;
 
 
 public class All_Patient_info extends JFrame{
-    All_Patient_info(){
-
+    private String userId;
+    All_Patient_info(String userId){
+        this.userId = userId; // Store the userId
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int width = screenSize.width;
@@ -58,7 +59,7 @@ JScrollPane scrollPane = new JScrollPane(table); // Line 38
 
 try {
     conection c = new conection();
-    String q = "select * from patient_info";
+    String q = "SELECT ID, Number, Name, Gender, Patient_Disease, Room_Number, Time, Deposite, Country, Faculty FROM patient_info where userId = '" + this.userId + "'";
     java.sql.ResultSet resultSet = c.statement.executeQuery(q);
     table.setModel(DbUtils.resultSetToTableModel(resultSet));
     
@@ -158,6 +159,6 @@ try {
         
     }
     public static void main(String[] args) {
-        new All_Patient_info();
+        new All_Patient_info("Siam");
     }
 }

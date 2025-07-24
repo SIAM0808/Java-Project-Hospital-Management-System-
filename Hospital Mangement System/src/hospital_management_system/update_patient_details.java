@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class update_patient_details extends JFrame {
 
-    update_patient_details() {
+    update_patient_details(String userId) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
         int width = screenSize.width;
@@ -21,15 +21,11 @@ public class update_patient_details extends JFrame {
 
         int x = (width/2)/2;
 
-       
-
-
         JLabel l1 = new JLabel("Update Patient Details");
-        l1.setBounds(x, 30, 400, 30);
+        l1.setBounds(x-100, 30, 400, 30);
         l1.setFont(new Font("Arial", Font.BOLD, 30));
         l1.setForeground(Color.WHITE);
         panel.add(l1);
-
 
         JLabel name = new JLabel("Name: ");
         name.setBounds(50, 90, 80, 30);
@@ -37,11 +33,9 @@ public class update_patient_details extends JFrame {
         panel.add(name);
 
         JTextField t = new JTextField();
-        // t.setBounds(200, 90, 150, 30);
         t.setBounds(200, 140, 150, 30);
         t.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(t);
-
 
         JLabel l2 = new JLabel("Patient ID: ");
         l2.setBounds(50, 135, 80, 30);
@@ -49,14 +43,13 @@ public class update_patient_details extends JFrame {
         panel.add(l2);
 
         Choice c1 = new Choice();
-        // c1.setBounds(200, 140, 150, 30);
         c1.setBounds(200, 90, 150, 30);
         c1.setFont(new Font("Arial", Font.BOLD, 11));
         panel.add(c1);
 
         try {
             conection c = new conection();
-            ResultSet rs = c.statement.executeQuery("select * from patient_info");
+            ResultSet rs = c.statement.executeQuery("select * from patient_info where userId = '" + userId + "'");
             while (rs.next()) {
                 c1.add(rs.getString("Name"));
             }
@@ -84,8 +77,6 @@ public class update_patient_details extends JFrame {
         t2.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(t2);
 
-
-
         JLabel l5 = new JLabel("Amount Paid (TK): ");
         l5.setBounds(50, 280, 150, 30);
         l5.setFont(new Font("Arial", Font.BOLD, 15));
@@ -96,20 +87,17 @@ public class update_patient_details extends JFrame {
         t3.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(t3);
 
-
         JLabel l6 = new JLabel("Pending Amount: ");
         l6.setBounds(50, 335, 150, 30);
         l6.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(l6);
 
-
         JTextField t4 = new JTextField();
         t4.setBounds(200, 335, 150, 30);
         t4.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(t4);
-        
-        
 
+        // Buttons repositioned with proper spacing
         JButton b1 = new JButton("Check");
         b1.setBounds(50, 400, 100, 30);
         b1.setFont(new Font("Arial", Font.BOLD, 15));
@@ -117,17 +105,21 @@ public class update_patient_details extends JFrame {
         b1.setForeground(Color.WHITE);
         panel.add(b1);
 
+        JButton update = new JButton("Update");
+        update.setBounds(190, 400, 100, 30);
+        update.setFont(new Font("Arial", Font.BOLD, 15));
+        update.setBackground(Color.BLACK);
+        update.setForeground(Color.WHITE);
+        panel.add(update);
 
         JButton b2 = new JButton("Back");
-        b2.setBounds(200, 400, 100, 30);
+        b2.setBounds(320, 400, 100, 30);
         b2.setFont(new Font("Arial", Font.BOLD, 15));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
         panel.add(b2);
 
-
         b1.addActionListener(_ -> {
-            
             String patientID = c1.getSelectedItem();
             String q = "select * from patient_info where Name = '"+patientID+"'";
 
@@ -146,31 +138,15 @@ public class update_patient_details extends JFrame {
                     String s1 = rs.getString("Price");
                     int amountPaid = Integer.parseInt(s1) - Integer.parseInt(t3.getText());
                     t4.setText(""+amountPaid);
-                    // t4.setText(rs.getString("Pending_Amount"));
                 }
-                // JOptionPane.showMessageDialog(null, "Patient Details Updated Successfully");
-                // setVisible(false);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
         });
 
-
-
         b2.addActionListener(_ -> {
             setVisible(false);
         });
-
-
-
-
-        JButton update = new JButton("Update");
-        update.setBounds(50, 450, 100, 30);
-        update.setFont(new Font("Arial", Font.BOLD, 15));
-        update.setBackground(Color.BLACK);
-        update.setForeground(Color.WHITE);
-        panel.add(update);
-
 
         update.addActionListener(_ -> {
             String patientID = c1.getSelectedItem();
@@ -194,13 +170,14 @@ public class update_patient_details extends JFrame {
         });
 
         setUndecorated(true);
-        setSize(width/2+200, height/2+130);
+        // Decreased width by 80 units: from (width/2+200) to (width/2+120)
+        setSize(width/2+90, height/2+100);
         setLayout(null);
-        setLocation(width/5, height/5);
+        setLocation(width/5, height/5+80);
         setVisible(true);
-
     }
+
     public static void main(String[] args) {
-        new update_patient_details();
+        new update_patient_details("No User Id Invoked in update_patient_details.java");
     }
 }

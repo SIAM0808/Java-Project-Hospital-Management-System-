@@ -151,7 +151,7 @@ public class Reception extends JFrame {
         b6.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                new  patient_discharge();
+                new  patient_discharge(userId);
             }
         });
 
@@ -164,7 +164,7 @@ public class Reception extends JFrame {
         b7.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                new update_patient_details();
+                new update_patient_details(userId);
             }
         });
 

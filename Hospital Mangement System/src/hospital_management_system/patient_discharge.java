@@ -10,7 +10,7 @@ import javax.swing.*;
 // import net.proteanit.sql.DbUtils;
 
 public class patient_discharge extends JFrame{
-    patient_discharge() {
+    patient_discharge(String userId) {
       
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -54,7 +54,7 @@ public class patient_discharge extends JFrame{
 
         try {
             conection c = new conection();
-            ResultSet rs = c.statement.executeQuery("select * from patient_info");
+            ResultSet rs = c.statement.executeQuery("select * from patient_info where userId = '"+userId+"'");
             while (rs.next()) {
                 c1.add(rs.getString("Number"));
             }
@@ -156,7 +156,7 @@ public class patient_discharge extends JFrame{
                 c.statement.executeUpdate(q2);
                 JOptionPane.showMessageDialog(null, "Patient Discharged Successfully");
                 setVisible(false);
-                new patient_discharge();
+                new patient_discharge(userId);
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
@@ -175,6 +175,6 @@ public class patient_discharge extends JFrame{
         setVisible(true);
     }
     public static void main(String[] args) {
-        new patient_discharge();
+        new patient_discharge("No User Id Invoked in patient_discharge.java");
     }
 }

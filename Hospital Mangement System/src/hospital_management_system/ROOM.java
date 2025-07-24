@@ -92,7 +92,7 @@ public class ROOM extends JFrame {
         panel.setBounds(150, 0, width/2+100, height-10);
         setSize(width/2+100, height/2);
         // setLayout(getLayout());
-        setLocation(width/5 - 50, height/4);
+        setLocation(width/5 - 50, height/4 + 80);
         setVisible(true);
     }
     public static void main(String[] args) {

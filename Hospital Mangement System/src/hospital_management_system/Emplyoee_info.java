@@ -109,7 +109,7 @@ public class Emplyoee_info extends JFrame{
         setUndecorated(true);
         setSize(width/2+100, height/2+100);
         setLayout(getLayout());
-        setLocation(width/5, height/4);
+        setLocation(width/5, height/4+50);
         setVisible(true);
     }
 

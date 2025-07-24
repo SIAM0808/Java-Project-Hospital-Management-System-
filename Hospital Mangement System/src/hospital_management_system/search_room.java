@@ -102,7 +102,7 @@ public class search_room extends JFrame{
         });
 
         JButton back = new JButton("Back");
-        back.setBounds(300, 510, 120, 30);
+        back.setBounds(300, 450, 120, 30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         panel.add(back);
@@ -113,8 +113,8 @@ public class search_room extends JFrame{
         });
 
         setUndecorated(true);
-        setSize(800, 600);
-        setLocation(290, 200);
+        setSize(800, 500);
+        setLocation(290, 270);
         // setLayout(null);
         setVisible(true);
     }

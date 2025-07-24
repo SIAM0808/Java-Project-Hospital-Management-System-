@@ -150,7 +150,7 @@ public class ambulance extends JFrame{
         panel.add(exitButton);
         setUndecorated(true);
         setSize(800, 400);
-        setLocation(350, 200);
+        setLocation(350, 300);
         setLayout(null);
         setVisible(true);
     }

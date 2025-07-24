@@ -1,6 +1,8 @@
 package hospital_management_system;
 
 import java.awt.*;
+import java.sql.ResultSet;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -59,8 +61,14 @@ JScrollPane scrollPane = new JScrollPane(table); // Line 38
 
 try {
     conection c = new conection();
-    String q = "SELECT ID, Number, Name, Gender, Patient_Disease, Room_Number, Time, Deposite, Country, Faculty FROM patient_info where userId = '" + this.userId + "'";
-    java.sql.ResultSet resultSet = c.statement.executeQuery(q);
+    String q = null;
+    if(userId == "#AdmInfo#"){
+        q = "SELECT * FROM patient_info";
+    }else{
+        q = "SELECT ID, Number, Name, Gender, Patient_Disease, Room_Number, Time, Deposite, Country, Faculty FROM patient_info where userId = '" + this.userId + "'";
+    }
+    
+    ResultSet resultSet = c.statement.executeQuery(q);
     table.setModel(DbUtils.resultSetToTableModel(resultSet));
     
     // Set column widths
@@ -154,11 +162,11 @@ try {
         setUndecorated(true);
         setSize(width/2+200, height/2+100);
         setLayout(null);
-        setLocation(width/5, height/4);
+        setLocation(width/5, height/4+60);
         setVisible(true);
         
     }
     public static void main(String[] args) {
-        new All_Patient_info("Siam");
+        new All_Patient_info("No Info Invoked");
     }
 }

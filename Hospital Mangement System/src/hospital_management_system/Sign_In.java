@@ -19,7 +19,7 @@ public class Sign_In extends JFrame implements ActionListener {
         panel.setBackground(new Color(111, 164, 190));
         add(panel);
 
-        JLabel username = new JLabel("Username");
+        JLabel username = new JLabel("User ID: ");
         username.setBounds(55, 60, 100, 30);
         username.setFont(new Font("Arial", Font.BOLD, 16));
         username.setForeground(Color.WHITE);
@@ -75,7 +75,7 @@ public class Sign_In extends JFrame implements ActionListener {
             Sign_In.this.setVisible(false);
         });
 
-        comboBox = new JComboBox<>(new String[] { "Admin", "Patient" });
+        comboBox = new JComboBox<>(new String[] { "Admin", "General User" });
         comboBox.setBounds(155, 160, 200, 30);
         comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         comboBox.setBackground(new Color(109, 164, 170));
@@ -111,7 +111,7 @@ public class Sign_In extends JFrame implements ActionListener {
                 if (person == "Admin") {
                     q = "select * from login where ID = '" + user + "' and PW = '" + Pass + "'";
                 } else {
-                    q = "select * from userRegister where username = '" + user + "' and password = '" + Pass + "'";
+                    q = "select * from userRegister where userId = '" + user + "' and password = '" + Pass + "'";
                 }
 
                 System.out.println("query: " + q);
@@ -123,23 +123,10 @@ public class Sign_In extends JFrame implements ActionListener {
                 if (resultSet.next()) {
                     // Use the result only once
                     if (person.equals("Admin")) {
-                        new adminReception();
-                    } else if (person.equals("Patient")) {
-                        // Query to find userId using username and password
-                        String userIdQuery = "SELECT userId FROM userRegister WHERE username = '" + user
-                                + "' AND password = '" + Pass + "'";
-                        try {
-                            ResultSet rs = c.statement.executeQuery(userIdQuery);
-                            if (rs.next()) {
-                                String userId = rs.getString("userId");
-                                System.out.println("User ID: " + userId); // Debugging
-                                new Reception(userId); // Open Reception window
-                            } else {
-                                JOptionPane.showMessageDialog(null, "User not found!");
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+                        new adminReception(user);
+                    } else if (person.equals("General User")) {
+                       
+                                new Reception(user); // Open Reception window
                     }
                     setVisible(false);
                 } else {

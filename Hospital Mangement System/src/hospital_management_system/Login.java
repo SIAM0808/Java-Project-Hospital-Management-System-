@@ -103,7 +103,7 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b1) {
-            new Sign_In();
+            new Sign_In(this);
         } else if(e.getSource() == b2){
             new Sign_Up();
         }else{

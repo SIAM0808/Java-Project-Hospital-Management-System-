@@ -97,6 +97,20 @@ public class update_patient_details extends JFrame {
         t4.setFont(new Font("Arial", Font.BOLD, 15));
         panel.add(t4);
 
+        // set this parallel to the pending amount label
+        JLabel l66 = new JLabel("Remaining Amount: ");
+        l66.setBounds(370, 335, 150, 30);
+        l66.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(l66);
+
+        // text feild for Remaining amount
+        JTextField t5 = new JTextField();
+        t5.setBounds(535, 335, 110, 30);
+        t5.setFont(new Font("Arial", Font.BOLD, 15));
+        panel.add(t5);
+
+
+
         // Buttons repositioned with proper spacing
         JButton b1 = new JButton("Check");
         b1.setBounds(50, 400, 100, 30);
@@ -136,8 +150,18 @@ public class update_patient_details extends JFrame {
                 ResultSet rs = c.statement.executeQuery("select * from Room where room_no = '"+t1.getText()+"'");
                 while(rs.next()){
                     String s1 = rs.getString("Price");
-                    int amountPaid = Integer.parseInt(s1) - Integer.parseInt(t3.getText());
-                    t4.setText(""+amountPaid);
+                    int amountPaid =  Integer.parseInt(t3.getText()) - Integer.parseInt(s1);
+                    if(amountPaid < 0) {
+                        amountPaid *= -1;
+                        t4.setText("" + amountPaid);
+                        t5.setText("" + 0);
+                    }
+                    else {
+                        
+                        t5.setText(""+amountPaid);
+                        t4.setText(""+0);
+                    }
+                    // t4.setText(""+amountPaid);
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -145,7 +169,8 @@ public class update_patient_details extends JFrame {
         });
 
         b2.addActionListener(_ -> {
-            setVisible(false);
+            // setVisible(false);
+            this.dispose();
         });
 
         update.addActionListener(_ -> {
@@ -153,17 +178,24 @@ public class update_patient_details extends JFrame {
             String roomNumber = t1.getText();
             String inTime = t2.getText();
             String amountPaid = t3.getText();
-            String pendingAmount = t4.getText();
-
-            String q = "update patient_info set Room_Number = '"+roomNumber+"', Time = '"+inTime+"', Deposite = '"+amountPaid+"' where Name = '"+patientID+"'";
-            String q1 = "update Room set Pending_Amount = '"+pendingAmount+"' where room_no = '"+roomNumber+"'";
-
+            // String pendingAmount = t4.getText();
+            // conection c = new conection();
+            String q = "update patient_info set Room_Number = '"+roomNumber+"', Time = '"+inTime+"', Deposite = Deposite + '"+amountPaid+"' where Name = '"+patientID+"'";
+            String available = "Available"; // or "No", set according to your logic
+            String q1 = "update Room set Availability = '"+available+"' where room_no = '"+roomNumber+"'";
             try {
                 conection c = new conection();
                 c.statement.executeUpdate(q);
                 c.statement.executeUpdate(q1);
+                // ResultSet rs = c.statement.executeQuery("select * from Room where room_no = '"+t1.getText()+"'");
+                // while(rs.next()){
+                //     String s1 = rs.getString("Price");
+                //     int remain = Integer.parseInt(s1) - Integer.parseInt(t3.getText());
+                //     t4.setText(""+amountPaid);
+                // }
                 JOptionPane.showMessageDialog(null, "Patient Details Updated Successfully");
-                setVisible(false);
+                // setVisible(false);
+                this.dispose();
             } catch (Exception e1) {
                 e1.printStackTrace();
             }

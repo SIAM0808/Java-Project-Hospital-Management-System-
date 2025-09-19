@@ -167,7 +167,8 @@ public class adminReception extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Login();
-                adminReception.this.setVisible(false);
+                // adminReception.this.setVisible(false);
+                adminReception.this.dispose();
             }
         });
 
@@ -175,13 +176,27 @@ public class adminReception extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String adminId = JOptionPane.showInputDialog("Enter Admin ID to Remove:");
-                if (adminId == null || adminId.trim().isEmpty()) {
+
+                // Check if user clicked Cancel
+                if (adminId == null) {
+                    return; // Exit without showing any message
+                }
+
+                // Check if user clicked OK with empty field
+                if (adminId.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Admin ID cannot be empty.");
                     return;
                 }
 
                 String password = JOptionPane.showInputDialog("Enter Admin Password:");
-                if (password == null || password.trim().isEmpty()) {
+
+                // Check if user clicked Cancel on password dialog
+                if (password == null) {
+                    return; // Exit without showing any message
+                }
+
+                // Check if user clicked OK with empty password
+                if (password.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Password cannot be empty.");
                     return;
                 }
@@ -192,7 +207,8 @@ public class adminReception extends JFrame {
                     ResultSet rs = c.statement.executeQuery(query);
 
                     if (rs.next()) {
-                        String deleteQuery = "DELETE FROM login WHERE ID = '" + adminId + "' AND PW = '" + password + "'";
+                        String deleteQuery = "DELETE FROM login WHERE ID = '" + adminId + "' AND PW = '" + password
+                                + "'";
                         int rowsAffected = c.statement.executeUpdate(deleteQuery);
 
                         if (rowsAffected > 0) {

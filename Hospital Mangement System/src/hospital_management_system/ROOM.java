@@ -83,7 +83,8 @@ public class ROOM extends JFrame {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                // setVisible(false);
+                ROOM.this.dispose();
             }
         });
 

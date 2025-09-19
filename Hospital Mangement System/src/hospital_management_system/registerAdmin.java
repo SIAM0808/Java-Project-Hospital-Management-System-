@@ -158,7 +158,8 @@ public class registerAdmin extends JFrame implements ActionListener {
 
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(null, "Admin registered successfully!");
-                    this.setVisible(false);
+                    // this.setVisible(false);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Registration failed!");
                 }

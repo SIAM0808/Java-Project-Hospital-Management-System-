@@ -155,8 +155,9 @@ public class patient_discharge extends JFrame{
                 String q2 = "update room set Availability = 'Available' where room_no = '"+RNo.getText()+"'";
                 c.statement.executeUpdate(q2);
                 JOptionPane.showMessageDialog(null, "Patient Discharged Successfully");
-                setVisible(false);
-                new patient_discharge(userId);
+                // setVisible(false);
+                // new patient_discharge(userId);
+                this.dispose();
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
@@ -164,14 +165,14 @@ public class patient_discharge extends JFrame{
 
 
         back.addActionListener(_ -> {
-            this.setVisible(false);
+            this.dispose();
         });
 
 
         setUndecorated(true);
-        setSize(width/2, height/2+100);
+        setSize(width/2 - 80, height/2);
         setLayout(null);
-        setLocation(width/5 + 70, height/4);
+        setLocation(width/5 + 90, height/4 + 90);
         setVisible(true);
     }
     public static void main(String[] args) {

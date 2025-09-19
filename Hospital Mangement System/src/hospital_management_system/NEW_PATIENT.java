@@ -59,7 +59,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
 
 
 
-        comboBox = new JComboBox<String>(new String[] {"Birth Certificate", "Driving License", "Passport", "Adhar Card"});
+        comboBox = new JComboBox<String>(new String[] {"Birth Certificate", "Driving License", "Passport"});
         comboBox.setBounds(240, 72, 200, 25);
         panel.add(comboBox);
 
@@ -250,7 +250,8 @@ public class NEW_PATIENT extends JFrame implements ActionListener{
             }
 
     }else{
-        setVisible(false);
+        // setVisible(false);
+        this.dispose();
     }
 }
 

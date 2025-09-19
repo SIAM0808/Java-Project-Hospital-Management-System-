@@ -153,7 +153,8 @@ public class adminRegister extends JFrame implements ActionListener {
                     int rowsAffected = c.statement.executeUpdate(q);
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(null, "Sign Up Successful! You can now Sign In.");
-                        this.setVisible(false);
+                        // this.setVisible(false);
+                        this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Sign Up Failed. Please try again.");
                     }

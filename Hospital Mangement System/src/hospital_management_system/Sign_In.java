@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+// import java.security.PrivateKey;
 import java.sql.ResultSet;
 
 public class Sign_In extends JFrame implements ActionListener {
@@ -11,8 +12,10 @@ public class Sign_In extends JFrame implements ActionListener {
     JButton sign_in, sign_up, cancel;
     JPasswordField passwordField;
     JComboBox<String> comboBox;
+    private Login login;
 
-    Sign_In() {
+    Sign_In(Login login) {
+        this.login = login;
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(0, 0, 450, 450);
@@ -72,7 +75,7 @@ public class Sign_In extends JFrame implements ActionListener {
 
         cancel.addActionListener(_ -> {
             // Only close the Sign_In window, not the whole app
-            Sign_In.this.setVisible(false);
+            Sign_In.this.dispose();
         });
 
         comboBox = new JComboBox<>(new String[] { "Admin", "General User" });
@@ -89,7 +92,9 @@ public class Sign_In extends JFrame implements ActionListener {
         setLayout(null);
         setVisible(true);
     }
-
+    Sign_In(){
+        this(null);
+    }
     public static void main(String[] args) {
         new Sign_In();
     }
@@ -124,11 +129,15 @@ public class Sign_In extends JFrame implements ActionListener {
                     // Use the result only once
                     if (person.equals("Admin")) {
                         new adminReception(user);
+                        this.dispose();
+                        login.dispose();
                     } else if (person.equals("General User")) {
                        
                                 new Reception(user); // Open Reception window
+                                this.dispose();
+                                login.dispose();
                     }
-                    setVisible(false);
+                    // this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username or Password");
                 }
@@ -139,7 +148,7 @@ public class Sign_In extends JFrame implements ActionListener {
 
         } else {
             new Sign_Up();
-            setVisible(false);
+            this.dispose();
         }
 
     }

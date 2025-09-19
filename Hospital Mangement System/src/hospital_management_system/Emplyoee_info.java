@@ -99,7 +99,7 @@ public class Emplyoee_info extends JFrame{
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.addActionListener(_ -> {
-            this.setVisible(false);
+            this.dispose();
         });
         panel.add(back);
 

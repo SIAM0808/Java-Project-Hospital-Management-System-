@@ -57,7 +57,7 @@ public class ambulance extends JFrame{
         panel.add(available);
 
 
-        JLabel car_name = new JLabel("Car Name");
+        JLabel car_name = new JLabel("Car ID");
         car_name.setBounds(468, 20, 100, 20);
         car_name.setFont(new Font("Arial", Font.BOLD, 13));
         car_name.setForeground(Color.WHITE);
@@ -144,7 +144,8 @@ public class ambulance extends JFrame{
             int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 // System.exit(0);
-                this.setVisible(false);
+                // this.setVisible(false);
+                this.dispose();
             }
         });
         panel.add(exitButton);

@@ -171,7 +171,7 @@ public class Sign_Up extends JFrame implements ActionListener {
                     int rowsAffected = c.statement.executeUpdate(q2);
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(null, "Registered Successful! You can now Login In.");
-                        this.setVisible(false);
+                        this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Registeration Failed. Please try again.");
                     }

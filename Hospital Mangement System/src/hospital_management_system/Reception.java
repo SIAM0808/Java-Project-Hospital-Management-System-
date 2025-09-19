@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Reception extends JFrame {
@@ -48,6 +49,7 @@ public class Reception extends JFrame {
                 g.drawString("Welcome to DR. M R Khan Medical Center", textX, 30);
             }
         };
+        // Welcome!
             // textWidth = 400; // Adjust the width of the text as needed
         textX = 600; // Start from the right side
         textPanel.setBounds(10, 105, 600, 30); // Adjust the position and size as needed
@@ -149,11 +151,42 @@ public class Reception extends JFrame {
         b6.setBounds(450, 65, 200, 30);
         panel2.add(b6);
         b6.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                new  patient_discharge(userId);
+    @Override
+    public void actionPerformed(ActionEvent e){
+        try {
+            conection c = new conection();
+            // Check for patients who are currently admitted (assuming there's a status field)
+            String checkQuery = "SELECT COUNT(*) as patientCount FROM patient_info WHERE userId = '" + userId + "'";
+            ResultSet rs = c.statement.executeQuery(checkQuery);
+            
+            if (rs.next()) {
+                int patientCount = rs.getInt("patientCount");
+                
+                if (patientCount > 0) {
+                    // User has currently admitted patients
+                    new patient_discharge(userId);
+                } else {
+                    // No currently admitted patients
+                    JOptionPane.showMessageDialog(null,"", "No Admitted Patients", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-        });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // // If there's an error, still allow opening the discharge window
+            // // but show a warning
+            // int choice = JOptionPane.showConfirmDialog(null, 
+            //     "Unable to verify patient records. Do you want to proceed anyway?",
+            //     "Database Error", 
+            //     JOptionPane.YES_NO_OPTION,
+            //     JOptionPane.WARNING_MESSAGE);
+            
+            // if (choice == JOptionPane.YES_OPTION) {
+            //     new patient_discharge(userId);
+            // }
+        }
+    }
+});
 
         JButton b7 = new JButton("Update Patient Details");
         b7.setBackground(new Color(246, 215, 118));
@@ -204,7 +237,7 @@ public class Reception extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e){
                 new Login();
-                Reception.this.setVisible(false);
+                Reception.this.dispose();;
             }
         });
         conection c = new conection();
@@ -218,7 +251,7 @@ public class Reception extends JFrame {
                 userName = rs.getString("username");
                 JLabel userLabel = new JLabel("Welcome! " + userName);
                 userLabel.setFont(new Font("Arial", Font.BOLD, 30));
-                userLabel.setBounds(600, 20, 400, 30); // Adjust the position and size as needed
+                userLabel.setBounds(600, 20, 500, 30); // Adjust the position and size as needed
                 userLabel.setForeground(Color.WHITE);
                 panel1.add(userLabel); // Add the label to panel1
             }else {

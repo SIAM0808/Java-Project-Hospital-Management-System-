@@ -109,7 +109,8 @@ public class search_room extends JFrame{
 
 
         back.addActionListener(_ -> {
-            setVisible(false);
+            // setVisible(false);
+            this.dispose();
         });
 
         setUndecorated(true);
